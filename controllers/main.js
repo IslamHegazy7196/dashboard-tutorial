@@ -1,11 +1,12 @@
-
 const customAPIError=require('../errors/custom-error')
+const {BadRequest}=require('../errors')
+
 const jwt=require('jsonwebtoken')
 
 const login = (req, res) => {
     const {username,password}=req.body
     if(!username||!password){
-        throw new customAPIError('please provise username and password',400)
+        throw new BadRequest ('please provise username and password')
     }
 const id =new Date().getDate()
 const token=jwt.sign({id,username},process.env.JWT_TOKEN,{expiresIn:'30d'})
